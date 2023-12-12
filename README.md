@@ -4,4 +4,4 @@ Interpreter and compiler for the [Monkey programming language](https://interpret
 
 # TODO
 
-[ ] Optimize and cleanup the `String` type
+- [ ] Optimize and cleanup the `String` type
