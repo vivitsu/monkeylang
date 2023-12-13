@@ -1,6 +1,6 @@
 #include "string.c"
 
-typedef enum TokenType 
+typedef enum TokenType
 {
     ILLEGAL = 1,
     EOF = 2,
@@ -12,7 +12,7 @@ typedef enum TokenType
     // Operators
     ASSIGN = 5,
     PLUS = 6,
-    
+
     // Delimiters
     COMMA = 7,
     SEMICOLON = 8,
@@ -20,26 +20,27 @@ typedef enum TokenType
     RPAREN = 10,
     LBRACE = 11,
     RBRACE = 12,
-    
-    // Keywords    
+
+    // Keywords
     FUNCTION = 13,
     LET = 14
 } TokenType;
 
-typedef struct Token 
+typedef struct Token
 {
     TokenType type;
     String literal;
 } Token;
 
-typedef struct Lexer {
+typedef struct Lexer
+{
     String input;
     u32 pos;
     u32 read_pos;
     u8 ch;
 } Lexer;
 
-void ReadChar(Lexer* lexer) 
+void ReadChar(Lexer* lexer)
 {
     if (lexer->read_pos >= lexer->input.len)
     {
@@ -71,7 +72,7 @@ Lexer NewLexer(String input)
 
 Token NewToken(TokenType type, u8 ch)
 {
-    char lit[] = { ch, 0 }; 
+    char lit[2] = {ch, 0};
     Token token = {
         .type = type,
         .literal = NewString(lit, 1)
@@ -80,11 +81,11 @@ Token NewToken(TokenType type, u8 ch)
     return token;
 }
 
-Token NextToken(Lexer lexer) 
+Token NextToken(Lexer lexer)
 {
     Token token;
 
-    switch(lexer.ch)
+    switch (lexer.ch)
     {
         case '=':
         {
