@@ -1,9 +1,9 @@
-#include "string.c"
+#include "string.h"
 
 typedef enum TokenType
 {
     ILLEGAL = 1,
-    EOF = 2,
+    END_OF_FILE = 2,
 
     // Identifiers + literals
     IDENT = 3, // add, foobar, x, y, ...
@@ -72,10 +72,9 @@ Lexer NewLexer(String input)
 
 Token NewToken(TokenType type, u8 ch)
 {
-    char lit[2] = {ch, 0};
     Token token = {
         .type = type,
-        .literal = NewString(lit, 1)
+        .literal = StringFromChar(ch)
     };
 
     return token;

@@ -1,3 +1,4 @@
 monkey
 *.dSYM
 .vscode
+*.o

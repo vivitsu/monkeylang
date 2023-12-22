@@ -5,12 +5,11 @@ int main(int argc, char** argv)
 {
     // char* data = "=+(){};";
     char *data = "=";
-    u32 len = strlen(data);
-    String input = NewString(data, len);
+    String input = StringFromCString(data);
     Lexer lexer = NewLexer(input);
     Token token = NextToken(lexer);
 
     assert(token.type == ASSIGN);
-    assert(strncmp(token.literal.data, data, 1) == 0);
+    assert(StringEquals(input, token.literal) == true);
     return 0;
 }
