@@ -35,38 +35,34 @@ typedef struct Token
 typedef struct Lexer
 {
     String input;
-    u32 pos;
-    u32 read_pos;
+    u64 pos;
+    u64 read_pos;
     u8 ch;
 } Lexer;
 
 void ReadChar(Lexer* lexer)
 {
-    if (lexer->read_pos >= lexer->input.len)
+    if (lexer->read_pos >= Size(lexer->input))
     {
         lexer->ch = 0;
     }
     else
     {
-        lexer->ch = lexer->input.data[lexer->read_pos];
+        lexer->ch = CharAt(lexer->input, lexer->read_pos);
     }
 
     lexer->pos = lexer->read_pos;
     lexer->read_pos += 1;
 }
 
-Lexer NewLexer(String input)
+Lexer* NewLexer(String input)
 {
-    Lexer lexer = {
-        .input = input,
-        .pos = 0,
-        .read_pos = 0,
-        .ch = 0
-
-    };
-
-    ReadChar(&lexer);
-
+    Lexer* lexer = malloc(sizeof(Lexer));
+    lexer->input = input;
+    lexer->pos = 0;
+    lexer->read_pos = 0;
+    lexer->ch = 0;
+    ReadChar(lexer);
     return lexer;
 }
 
@@ -80,18 +76,49 @@ Token NewToken(TokenType type, u8 ch)
     return token;
 }
 
-Token NextToken(Lexer lexer)
+Token NextToken(Lexer* lexer)
 {
     Token token;
 
-    switch (lexer.ch)
+    switch (lexer->ch)
     {
         case '=':
         {
-            token = NewToken(ASSIGN, lexer.ch);
-        }
+            token = NewToken(ASSIGN, lexer->ch);
+            break;
+        };
+        case '+':
+        {
+            token = NewToken(PLUS, lexer->ch);
+            break;
+        };
+        case '(':
+        {
+            token = NewToken(LPAREN, lexer->ch);
+            break;
+        };
+        case ')':
+        {
+            token = NewToken(RPAREN, lexer->ch);
+            break;
+        };
+        case '{':
+        {
+            token = NewToken(LBRACE, lexer->ch);
+            break;
+        };
+        case '}':
+        {
+            token = NewToken(RBRACE, lexer->ch);
+            break;
+        };
+        case ';':
+        {
+            token = NewToken(SEMICOLON, lexer->ch);
+            break;
+        };
     }
 
-    ReadChar(&lexer);
+    ReadChar(lexer);
     return token;
 }

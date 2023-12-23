@@ -12,6 +12,8 @@ typedef struct String
 } String;
 
 u64 CalculateCStringSize(char* str);
+u8 CharAt(String str, u64 index);
+u64 Size(String str);
 String CreateString(u8* data, u64 len);
 boolean StringEquals(String s1, String s2);
 String StringFromChar(u8 ch);

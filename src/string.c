@@ -52,3 +52,20 @@ String StringFromChar(u8 ch)
 
     return str;
 }
+
+u8 CharAt(String str, u64 index)
+{
+    if (index > str.len)
+    {
+        return 0;
+    }
+    else
+    {
+        return str.data[index];
+    }
+}
+
+u64 Size(String str)
+{
+    return str.len;
+}
