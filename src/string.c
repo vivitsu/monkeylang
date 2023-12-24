@@ -53,9 +53,27 @@ String StringFromChar(u8 ch)
     return str;
 }
 
+String Slice(String s, u64 start, u64 end)
+{
+    // TODO: validation & optimization
+    u64 size = end - start;
+    u8 *buffer = malloc(sizeof(u8) * size);
+    for (u64 index = 0; index < size; index++)
+    {
+        buffer[index] = s.data[start++];
+    }
+
+    String str = {
+        .data = buffer,
+        .len = size
+    };
+
+    return str;
+}
+
 u8 CharAt(String str, u64 index)
 {
-    if (index > str.len)
+    if (index >= str.len)
     {
         return 0;
     }
