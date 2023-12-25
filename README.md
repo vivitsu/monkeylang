@@ -6,4 +6,4 @@ Interpreter and compiler for the [Monkey programming language](https://interpret
 
 - [ ] Optimize and cleanup the `String` type
 - [ ] Evaluate memory allocation strategies, e.g., arenas
-- [ ] Add makefile
+- [x] Add makefile

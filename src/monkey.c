@@ -2,7 +2,7 @@
 #include "token.h"
 #include <assert.h>
 
-int main(int argc, char** argv)
+int main()
 {
     char* data = "let five = 5;\nlet ten = 10;";
     String input = StringFromCString(data);
