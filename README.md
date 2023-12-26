@@ -5,5 +5,7 @@ Interpreter and compiler for the [Monkey programming language](https://interpret
 # TODO
 
 - [ ] Optimize and cleanup the `String` type
+- [ ] Add `const` where appropriate
+- [ ] Implement string interning for keywords and identifiers
 - [ ] Evaluate memory allocation strategies, e.g., arenas
 - [x] Add makefile

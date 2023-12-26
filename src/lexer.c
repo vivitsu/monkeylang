@@ -26,7 +26,7 @@ String ReadIdentifier(Lexer* lexer)
         ReadChar(lexer);
     }
 
-    return Slice(lexer->input, current_pos, lexer->pos);
+    return StringSlice(lexer->input, current_pos, lexer->pos);
 }
 
 String ReadNumber(Lexer* lexer)
@@ -37,18 +37,18 @@ String ReadNumber(Lexer* lexer)
         ReadChar(lexer);
     }
 
-    return Slice(lexer->input, current_pos, lexer->pos);
+    return StringSlice(lexer->input, current_pos, lexer->pos);
 }
 
 void ReadChar(Lexer* lexer)
 {
-    if (lexer->read_pos >= Size(lexer->input))
+    if (lexer->read_pos >= StringLength(lexer->input))
     {
         lexer->ch = 0;
     }
     else
     {
-        lexer->ch = CharAt(lexer->input, lexer->read_pos);
+        lexer->ch = StringCharAt(lexer->input, lexer->read_pos);
     }
 
     lexer->pos = lexer->read_pos;

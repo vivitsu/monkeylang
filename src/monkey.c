@@ -21,7 +21,7 @@ int main()
         {SEMICOLON, StringFromLiteral(";")}
     };
 
-    for (u64 index = 0; index < 9; index++)
+    for (usize index = 0; index < 9; index++)
     {
         Token actual = NextToken(&lexer);
         Token expected = tests[index];

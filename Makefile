@@ -1,7 +1,7 @@
 CC = clang
 # Debugging doesn't work unless we use `-g`
 # TODO: create debug and release builds
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -std=c17
 
 SRC_DIR = src
 
@@ -14,7 +14,6 @@ all: $(TARGET)
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
 
-# Rule for converting a .c file into a .o file
 %.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -c $<
 

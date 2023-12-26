@@ -1,5 +1,6 @@
 #include "types.h"
 #include "string.h"
+#include <assert.h>
 
 u64 CalculateCStringSize(char* str)
 {
@@ -25,7 +26,7 @@ boolean StringEquals(String s1, String s2)
         return false;
     }
 
-    for (u64 index = 0; index < s1.len; index++)
+    for (usize index = 0; index < s1.len; index++)
     {
         if (s1.data[index] != s2.data[index])
         {
@@ -53,12 +54,12 @@ String StringFromChar(u8 ch)
     return str;
 }
 
-String Slice(String s, u64 start, u64 end)
+String StringSlice(String s, u64 start, u64 end)
 {
-    // TODO: validation & optimization
     u64 size = end - start;
+    assert((size <= s.len));
     u8 *buffer = malloc(sizeof(u8) * size);
-    for (u64 index = 0; index < size; index++)
+    for (usize index = 0; index < size; index++)
     {
         buffer[index] = s.data[start++];
     }
@@ -71,7 +72,7 @@ String Slice(String s, u64 start, u64 end)
     return str;
 }
 
-u8 CharAt(String str, u64 index)
+u8 StringCharAt(String str, u64 index)
 {
     if (index >= str.len)
     {
@@ -83,7 +84,7 @@ u8 CharAt(String str, u64 index)
     }
 }
 
-u64 Size(String str)
+u64 StringLength(String str)
 {
     return str.len;
 }
