@@ -7,6 +7,7 @@ int main()
     char* data = "let five = 5;\nlet ten = 10;";
     String input = StringFromCString(data);
     Lexer lexer = NewLexer(input);
+    KeywordMap* map = InitKeywords();
     // size = 9
     Token tests[] = {
         {LET, StringFromLiteral("let")},
@@ -23,11 +24,12 @@ int main()
 
     for (usize index = 0; index < 9; index++)
     {
-        Token actual = NextToken(&lexer);
+        Token actual = NextToken(map, &lexer);
         Token expected = tests[index];
         assert((actual.type == expected.type));
         assert(StringEquals(actual.literal, expected.literal));
     }
 
+    FreeKeywordMap(map);
     return 0;
 }

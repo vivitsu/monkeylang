@@ -11,7 +11,7 @@ typedef struct String
     u64 len;
 } String;
 
-u64 CalculateCStringSize(char* str);
+u64 CalculateCStringSize(const char* str);
 u8 StringCharAt(String str, u64 index);
 u64 StringLength(String str);
 String CreateString(u8* data, u64 len);

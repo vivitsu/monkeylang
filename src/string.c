@@ -2,7 +2,7 @@
 #include "string.h"
 #include <assert.h>
 
-u64 CalculateCStringSize(char* str)
+u64 CalculateCStringSize(const char* str)
 {
     u64 size = 0;
     for (;str[size];size++);
