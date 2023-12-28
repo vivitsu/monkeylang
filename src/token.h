@@ -42,11 +42,11 @@ typedef struct KeywordMap
     usize len;
 } KeywordMap;
 
-KeywordMap* InitKeywords();
-void FreeKeywordMap(KeywordMap* map);
+KeywordMap InitKeywords();
+//void FreeKeywordMap(KeywordMap* map);
 Token NewToken(TokenType type, u8 ch);
 Token NewTokenFromLiteral(TokenType type, String lit);
-Token NextToken(KeywordMap* map, Lexer* lexer);
-TokenType LookupIdent(KeywordMap* map, String ident);
+Token NextToken(KeywordMap map, Lexer* lexer);
+TokenType LookupIdent(KeywordMap map, String ident);
 
 #endif

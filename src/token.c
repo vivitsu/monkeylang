@@ -2,29 +2,22 @@
 
 const char* fn_keyword = "fn";
 const char* let_keyword = "let";
+String keywords[2];
+TokenType types[2];
 
-KeywordMap* InitKeywords()
+KeywordMap InitKeywords()
 {
-    String* keywords = malloc(sizeof(String) * 2);
     keywords[0] = StringFromCString(fn_keyword);
     keywords[1] = StringFromCString(let_keyword);
-    TokenType* token_types = malloc(sizeof(TokenType) * 2);
-    token_types[0] = FUNCTION;
-    token_types[1] = LET;
-    KeywordMap* keyword_map = malloc(sizeof(KeywordMap));
-    keyword_map->keywords = keywords;
-    keyword_map->token_types = token_types;
-    keyword_map->len = 2;
+    types[0] = FUNCTION;
+    types[1] = LET;
+    KeywordMap keyword_map = {
+        .keywords = keywords,
+        .token_types = types,
+        .len = 2
+    };
     return keyword_map;
 }
-
-void FreeKeywordMap(KeywordMap* map)
-{
-    free(map->keywords);
-    free(map->token_types);
-    free(map);
-}
-
 
 Token NewToken(TokenType type, u8 ch)
 {
@@ -47,33 +40,20 @@ Token NewTokenFromLiteral(TokenType type, String lit)
 }
 
 // TODO: This is the dumbest possible version of lookup. Should be reworked
-TokenType LookupIdent(KeywordMap* map, String ident)
+TokenType LookupIdent(KeywordMap map, String ident)
 {
-    for (usize i = 0; i < map->len; i++)
+    for (usize i = 0; i < map.len; i++)
     {
-        if (StringEquals(ident, map->keywords[i]))
+        if (StringEquals(ident, map.keywords[i]))
         {
-            return map->token_types[i];
+            return map.token_types[i];
         }
     }
 
     return IDENT;
-    
-    // if (StringEquals(ident, StringFromLiteral("fn")))
-    // {
-    //     return FUNCTION;
-    // }
-    // else if (StringEquals(ident, StringFromLiteral("let")))
-    // {
-    //     return LET;        
-    // }
-    // else
-    // {
-    //     return IDENT;
-    // }
 }
 
-Token NextToken(KeywordMap* map, Lexer* lexer)
+Token NextToken(KeywordMap map, Lexer* lexer)
 {
     Token token;
 
