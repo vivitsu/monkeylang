@@ -39,7 +39,6 @@ Token NewTokenFromLiteral(TokenType type, String lit)
     return token;
 }
 
-// TODO: This is the dumbest possible version of lookup. Should be reworked
 TokenType LookupIdent(KeywordMap map, String ident)
 {
     for (usize i = 0; i < map.len; i++)
